@@ -12,6 +12,8 @@ export const Section = styled.section`
 
 export const TitleAndSubtitle = styled.div`
     overflow-x: hidden;
+    max-width: 90%;
+    margin: auto;
 
     h1 {
         color: #00BFFF;

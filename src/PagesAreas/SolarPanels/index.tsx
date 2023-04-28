@@ -32,7 +32,7 @@ const SolarPanels = ({setSelectedPage}: Props) => {
               }}   
             >
               SOLAR PANELS
-            </h1>
+            </motion.h1>
             <motion.h2 
               className='h2-title'
               onViewportEnter={() => setSelectedPage(SelectedPage.SolarPanels)}
