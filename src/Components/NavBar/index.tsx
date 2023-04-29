@@ -26,9 +26,15 @@ const HeaderNav = ({isTopOfPage, selectedPage, setSelectedPage}: Props) => {
     dispatch({
       type: 'CHANGE_LOG',
       payload: {
-          isLogged: true
+          isLogged: false
       }
-  });
+    });
+    dispatch({
+      type: 'CHANGE_NAME',
+      payload: {
+        name: ''
+      }
+    });
   }
   return (
     <C.Header isPageOnTop={isTopOfPage}>

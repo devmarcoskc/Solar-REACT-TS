@@ -14,7 +14,6 @@ const ItemToBuyGeneralArea = ({itemImgToShow, nameItem, generalPrice, actualPric
   const {state, dispatch} = useContext(Context);
 
   const updateCarItem = (e:React.MouseEvent<HTMLButtonElement>) => {
-    if(state.user.isLogged) {
       let Users:UserDataInfoType[] = JSON.parse(localStorage.getItem('Users') || '[]');
 
       const checkIndex = (element:UserDataInfoType, index: number, array:UserDataInfoType[]) => {
@@ -22,21 +21,22 @@ const ItemToBuyGeneralArea = ({itemImgToShow, nameItem, generalPrice, actualPric
       }
       let elementIndex = Users.findIndex(checkIndex);
 
-      let CheckIfCartItemAlreadyExists = Users[elementIndex].cartItem
-      .some((carItemName) => {
-        return carItemName === nameItem;
-      });
+      if(elementIndex !== -1) {
+        let CheckIfCartItemAlreadyExists = Users[elementIndex].cartItem
+        .some((carItemName) => {
+          return carItemName === nameItem;
+        });
 
-      if(CheckIfCartItemAlreadyExists) {
-        return false;
-      }
+        if(CheckIfCartItemAlreadyExists) {
+          return false;
+        }
 
-      Users[elementIndex].cartItem.push(nameItem);
+        Users[elementIndex].cartItem.push(nameItem);
 
-      localStorage.setItem('Users', JSON.stringify(Users));
-  }
-
-  alert('Login before you buy');
+        localStorage.setItem('Users', JSON.stringify(Users));
+    } else {
+      alert('login before you buy');
+    }
 }
 
   return (
