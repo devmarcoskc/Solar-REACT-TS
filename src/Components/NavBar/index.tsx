@@ -6,9 +6,10 @@ import Links from '../Links';
 import { Link } from 'react-router-dom';
 import { SelectedPage } from '../../Types/types';
 import useMediaQuery from '../../Hooks/useMediaQuery';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useContext } from 'react';
 import { Context } from '../../Contexts/Context';
+import * as React from 'react';
 
 type Props = {
   selectedPage: SelectedPage;
@@ -21,6 +22,20 @@ const HeaderNav = ({isTopOfPage, selectedPage, setSelectedPage}: Props) => {
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const isDesktopScreen = useMediaQuery('(min-width: 1060px)');
   const {state, dispatch} = useContext(Context);
+
+  const ref = useRef<HTMLDivElement>(null);
+
+
+  useEffect(() => {
+    if(!isDesktopScreen) {
+      let handler = (e:any) => {
+        if(!ref.current?.contains(e.target)) {
+          setIsMenuToggled(false);
+        }
+      };
+      document.addEventListener('mousedown', handler);
+    }
+  }, []);
 
   const handleLogout = (e:React.MouseEvent<HTMLSpanElement>) => {
     dispatch({
@@ -94,7 +109,7 @@ const HeaderNav = ({isTopOfPage, selectedPage, setSelectedPage}: Props) => {
         </C.Container>
 
         {!isDesktopScreen && (
-          <C.MobileNavigation marginToChange={isMenuToggled}>
+          <C.MobileNavigation marginToChange={isMenuToggled} ref={ref}>
                 <AiOutlineClose onClick={() => setIsMenuToggled(!isMenuToggled)}/>
                 <Links 
                   page="Home"
