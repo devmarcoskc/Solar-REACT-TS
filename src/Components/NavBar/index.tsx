@@ -33,8 +33,13 @@ const HeaderNav = ({isTopOfPage, selectedPage, setSelectedPage}: Props) => {
           setIsMenuToggled(false);
         }
       };
+
       document.addEventListener('mousedown', handler);
+      return() => {
+        document.removeEventListener('mousedown', handler);
+      }
     }
+    
   }, []);
 
   const handleLogout = (e:React.MouseEvent<HTMLSpanElement>) => {
