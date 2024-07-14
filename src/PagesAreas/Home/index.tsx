@@ -19,6 +19,8 @@ const Home = ({setSelectedPage}: Props) => {
         onViewportEnter={() => setSelectedPage(SelectedPage.Home)}
       >
         <C.Container> 
+          <p>Aluno: Marcos Kommling Centeno</p>
+          <p>RU 4627300</p>
           <h1>SOLAR ENERGY</h1>
           <h1>IS FOR EVERYBODY!</h1>
           <h2>Discover how to have more economical, 
